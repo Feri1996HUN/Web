@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hibakezelés példa</title>
+    <meta name="Author" content="Kovács Attila">
+    <script>
+        // Saját kivétel objektum elkészítése
+        noNameError = new Error("A felhasználó neve nem lehet üres!");
+        badNameError = new Error("Hibás felhasználó név!");
+
+        function validForm() {
+            checkName();
+        }
+
+        function checkName() {
+            var p = document.urlap.user.value;
+            try {
+                // Saját kivételek lekezelése
+                if (p == "") throw noNameError;
+                if (p != "János") throw badNameError;
+
+                // Érdemleges műveletek
+                alert("Üdvözlöm ".p);
+            } catch (e) {
+                // Minden más hiba esetén
+                mainExceptionHandler(e);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <form name="urlap">
+        Kérem a felhasználó nevét:
+        <input type="text" name="user" id="user" value=""><br></b>
+        <input type="submit" name="submit" value="OK" onclick="validForm()">
+    </form>
+</body>
+
+</html>

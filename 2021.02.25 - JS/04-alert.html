@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Alert</title>
+    <meta name="Author" content="Kovács Attila">
+    <script>
+        function koszon(param) {
+            alert("Szia! " + param);
+        }
+    </script>
+</head>
+
+<body>
+    <form action="" name="urlap">
+        <input type="text" placeholder="Kérem a neved!" id="nev">
+        <input type="button" value="Köszönés" onclick="koszon(document.urlap.nev.value)">
+    </form>
+</body>
+
+</html>

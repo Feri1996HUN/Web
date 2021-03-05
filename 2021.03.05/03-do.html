@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Do faktoriális példa</title>
+    <meta name="Author" content="Kovács Attila">
+    <script>
+        function fakt(p) {
+            var pp = parseInt(p);
+
+            var eredm = 1;
+            var i = 2;
+            do {
+                eredm *= i;
+                i++;
+            } while (i <= pp);
+            alert("Az eredmény = " + eredm);
+        }
+    </script>
+</head>
+
+<body>
+    <form name="urlap">
+        Szám: <input type="number" id="szam"><br><br>
+        <input type="button" value="Faktoriális" onclick="fakt(document.urlap.szam.value)">
+    </form>
+</body>
+
+</html>

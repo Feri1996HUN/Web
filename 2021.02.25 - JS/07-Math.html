@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Math függvénytár</title>
+    <meta name="Author" content="Kovács Attila">
+    <script>
+        function henger(s, m) {
+            /* r = parseFloat(s);
+            mm = parseFloat(m);
+
+            v = Math.pow(r, 2) * Math.PI * mm;
+            alert("A henger térfogata: " + v); */
+
+            alert("A henger térfogata: " +
+                Math.pow(parseFloat(s), 2) * Math.PI * parseFloat(m));
+        }
+    </script>
+</head>
+
+<body>
+    <form name="urlap">
+        <h2>Henger térfogata</h2>
+        Sugár: <input type="number" name="sugar" id="sugar"><br><br>
+        Magasság: <input type="number" name="magas" id="magas"><br><br>
+        <input type="button" value="OK" onclick="henger(document.urlap.sugar.value, document.urlap.magas.value);">
+    </form>
+</body>
+
+</html>

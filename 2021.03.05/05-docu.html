@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document stílus</title>
+    <meta name="Author" content="Kovács Attila">
+    <script>
+        function szin(f) {
+            document.body.style.backgroundColor = f;
+        }
+    </script>
+</head>
+
+<body>
+    <form name="urlap">
+        <input type="button" value="Piros" id="Red" onclick="szin(this.id)"><br><br>
+        <input type="button" value="Kék" id="Blue" onclick="szin(this.id)"><br><br>
+        <input type="button" value="Sárga" id="Yellow" onclick="szin(this.id)"><br><br>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- osztályzatok -pontok
+    0 - 39%: 1
+    40% - 54%: 2
+    55% - 69%: 3
+    70% - 84%: 4
+    85% - 100%    5
+-->
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Switch demó</title>
+    <meta name="Author" content="Kovács Attila">
+    <script>
+        function jegyszam(op, ep) {
+
+            var po = parseInt(op);
+            var pe = parseInt(ep);
+            if (pe > po) {
+                alert("Az elért pontszám nem lehet nagyobb, mint az összpontszám!");
+                return false;
+            }
+
+            var szazalek = Math.round((pe / po) * 100);
+
+            switch (true) {
+                case (szazalek < 40):
+                    alert("Elégtelen");
+                    break;
+
+                case (szazalek < 55):
+                    alert("Elégséges");
+                    break;
+
+                case (szazalek < 70):
+                    alert("Közepes");
+                    break;
+
+                case (szazalek < 85):
+                    alert("Jó");
+                    break;
+
+                case (szazalek < 101):
+                    alert("Kiváló");
+                    break;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <form name="urlap">
+        Összpontszám: <input type="number" name="opont" id="opont">
+        Elért Pontszám: <input type="number" id="epont"><br><br>
+        <input type="button" value="Jegy" onclick="jegyszam(document.urlap.opont.value, document.urlap.epont.value)">
+    </form>
+</body>
+
+</html>

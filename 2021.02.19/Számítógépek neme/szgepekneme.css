@@ -1,0 +1,14 @@
+body{
+    color: #333;
+    background-image: url("alap.jpg");
+    background-repeat: repeat;
+}
+
+hr{
+    border-radius: 50%;
+}
+
+#keret{
+    width: 650px;
+    margin: auto;
+}

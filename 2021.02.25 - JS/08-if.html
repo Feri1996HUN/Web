@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <title>If</title>
+    <meta name="Author" content="Kovács Attila">
+    <script>
+        function emel(f) {
+            var c = parseInt(f);
+            /* if (c < 100000) {
+                alert("Az új fizetése: " + (c * 1.25));
+            } else {
+                alert("Nem kap fizetés emelést.");
+            } */
+            alert((c < 100000) ? ("Az új fizetése: " + (c * 1.25)) : "Nem kap fizetés emelést.");
+        }
+    </script>
+</head>
+
+<body>
+    <form name="urlap">
+        Fizetés: <input type="number" value="0" id="fizu"><br><br>
+        <input type="button" value="Emelés" onclick="emel(document.urlap.fizu.value);">
+    </form>
+</body>
+
+</html>

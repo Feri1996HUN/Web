@@ -1,0 +1,76 @@
+body{
+    background-color:aqua;
+    width: 700px;
+    text-align: center;
+    margin: auto;
+}
+
+.tartalom{
+   width: 700px;
+    background-color: aqua;
+    display: inline-block;
+}
+
+.baloldal{
+    width: 200px;
+    background-color: aqua;
+    float: left;
+    padding: 20px;
+    text-align: left;
+    border: solid 3px red;
+    border-radius: 20px;
+    box-shadow: 3px 3px 12px red;
+}
+
+.jobboldal{
+    width: 200px;
+    background-color: aqua;
+    float: right;
+    padding: 20px;
+    text-align: left;
+    border: solid 3px green;
+    border-radius: 20px;
+    box-shadow: 3px 3px 12px green;
+}
+
+h1{
+    text-transform:lowercase;
+    font-size: 24px;
+}
+
+.baloldal li{
+    list-style-image: url(icon_bad.png);
+}
+
+.jobboldal li{
+    list-style-image: url(icon_good.png);
+}
+
+.kep img{
+    width: 20%;
+}
+
+.kep{
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    margin-bottom: -50%;
+    margin-right: -50%;
+}
+
+div.szoveg{
+    position: absolute;
+    top: 55%;
+    left: 40%;
+    margin: 10px auto;
+    text-align: center;
+    padding: 10px;
+    background-color: blue;
+    color: yellow;
+    font-weight: bold;
+    box-shadow: 10px 10px 5px #cfb7a2;
+    width:250px;         
+    transform: rotate(5deg);
+}
+

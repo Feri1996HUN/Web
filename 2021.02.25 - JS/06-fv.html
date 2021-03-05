@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Függvényekről</title>
+    <meta name="Author" content="Kovács Attila">
+    <script>
+        function osszead(p1, p2) {
+            var a = parseInt(p1);
+            var b = parseInt(p2);
+
+            alert("Összeg = " + (a + b));
+        }
+    </script>
+</head>
+
+<body>
+    <form name="urlap">
+        <input type="number" name="num1" id="num1" value="0">
+        <input type="number" name="num2" id="num2" value="0">
+        <input type="button" value="OK" onclick="osszead(document.urlap.num1.value, document.urlap.num2.value);">
+    </form>
+</body>
+
+</html>

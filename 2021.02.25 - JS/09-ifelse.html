@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <title>If-else</title>
+    <meta name="Author" content="Kovács Attila">
+    <script>
+        function pontszam(p) {
+            // Az össz pontszám mindig 100
+            var pnt = parseInt(p);
+
+            var j = "";
+            if (pnt < 40) { j = "elégtelen" }
+            else if (pnt < 50) { j = "elégséges" }
+            else if (pnt < 60) { j = "közepes" }
+            else if (pnt < 80) { j = "jó" }
+            else if (pnt < 101) { j = "kiváló" }
+            else { j = "Hibás adat" }
+
+            alert(j);
+        }
+    </script>
+</head>
+
+<body>
+    <form name="urlap">
+        pontszám: <input type="number" name="pont" id="pont">
+        <input type="button" value="Jegy" onclick="pontszam(document.urlap.pont.value)">
+    </form>
+</body>
+
+</html>
