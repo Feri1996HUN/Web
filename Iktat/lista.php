@@ -4,6 +4,10 @@ require "classes/db.php";
 // Megnézem, hogy bejelentkezett-e
 // Ha nem akkor visszaküldöm az index.php-ra
 session_start();
+
+$listara = false;
+
+
 if (isset($_SESSION["user"])){
     $user = ucfirst($_SESSION["user"]);
 }else {
@@ -18,14 +22,15 @@ $db->Connection("iktat");
 // A $users tömb feltöltése userekkel
 $users = $db->selectUpload();
 
-// Adatok beírása az adatbázisba
-if (isset($_POST["iktat"])){
-    $datum = $_POST["datum"];
+// letöltöm az adatokat
+if (isset($_POST["lista"])){
     $userid = $_POST["cimzett"];
-    $targy = $_POST["targy"];
-    $comment = $_POST["comment"];
+    $dattol = $_POST["datumtol"];
+    $datig = $_POST["datumig"];
 
-    $db->iktat($datum, $userid, $targy, $comment);
+    $levelek = $db->lista($userid, $dattol, $datig);
+
+    $listara = true;
 }
 ?>
 
@@ -58,10 +63,10 @@ if (isset($_POST["iktat"])){
             }
         ?>
       <li class="nav-item">
-        <a class="nav-link disabled" href="iktat.php">Iktatás</a>
+        <a class="nav-link" href="iktat.php">Iktatás</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="lista.php">Kimutatások</a>
+        <a class="nav-link disabled" href="lista.php">Kimutatások</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="index.php">Kilépés</a>
@@ -72,11 +77,7 @@ if (isset($_POST["iktat"])){
 </div>
 <!-- Adatform -->
 <form action="#" method="POST">
-    <!-- Dátum -->
-    <div class="form-group">
-    <label for="datum">Dátum</label>
-    <input type="date" name="datum" class="form-control" id="datum" required>
-  </div>
+
     <!-- Címzett feltöltés php-ból -->
     <label for="cimzett">Címzett kijelölése</label>
     <select class="form-control" name="cimzett" id="cimzett">
@@ -86,19 +87,38 @@ if (isset($_POST["iktat"])){
             }
         ?>
     </select>
-    <!-- Tárgy -->
-    <div class="form-group">
-    <label for="targy">Tárgy</label>
-    <input type="text" name="targy" class="form-control" id="targy" required placeholder="Adja meg a levél tárgyát">
+        <!-- Dátumtól -->
+        <div class="form-group">
+    <label for="datumtol">Dátumtól</label>
+    <input type="date" name="datumtol" class="form-control" id="datumtol" required>
   </div>
-    <!-- Leírás -->
-    <div class="form-group">
-    <label for="comment">Leírás</label>
-    <textarea rows="5" name="comment" class="form-control" id="comment"></textarea> 
+      <!-- Dátumig -->
+      <div class="form-group">
+    <label for="datumig">Dátumig</label>
+    <input type="date" name="datumig" class="form-control" id="datumig" required>
   </div>
     <!-- OK gomb -->
-<button type="submit" name="iktat" id="iktat" class="btn btn-success">Iktat</button>
+<button type="submit" name="lista" id="lista" class="btn btn-success">Lista</button>
 </form>
-    </div>
+<!-- Eredmény kiírása -->
+<div class="col-12 bg-secondary">
+<?php
+    if($listara){
+        print($user." levelei");
+?>
+        <table class="text-left">
+            <tr>
+                <th>Dátum</th>
+                <th>Tárgy</th>
+                <th>Leírás</th>
+        <?php
+        foreach ($levelek as $key) {
+            print("<tr><td>".$key['erkezett']."</td><td>".$key['targy']."</td><td>".$key['leiras']."</td></tr>");
+        }
+    }
+        ?>
+
+</div>
+</div>
 </body>
 </html>

@@ -37,5 +37,49 @@ class Dbconnect{
         
         return $tomb;
     }
+
+    function selectUpload(){
+    $tomb = null;
+
+    $res = $this->con->prepare("SELECT nev, ID_user FROM users");
+    $res->execute();
+
+    // Az eredmény halmazt kimentjük a tömbbe
+    while ($row = $res->fetch()) {
+        $tomb[] = $row;
+    }
+    
+    return $tomb;
+    }
+
+    function iktat($datum, $userid, $targy, $comment){
+        $res = $this->con->prepare("INSERT INTO `letters`(`erkezett`, `ID_user`, `targy`, `leiras`) VALUES (:erkezett,:ID_user,:targy,:leiras)");
+
+        $res->bindparam("erkezett", $datum);
+        $res->bindparam("ID_user", $userid);
+        $res->bindparam("targy", $targy);
+        $res->bindparam("leiras", $comment);
+
+        $res->execute();
+    }
+
+    function lista($uid, $dattol, $datig){
+        $tomb = null;
+        $res = $this->con->prepare("SELECT * FROM letters WHERE (erkezett BETWEEN :datumtol AND :datumig) AND ID_user = :ID_user");
+
+        $res->bindparam("ID_user", $uid);
+        $res->bindparam("datumtol", $dattol);
+        $res->bindparam("datumig", $datig);
+
+        $res->execute();
+
+    // Az eredmény halmazt kimentjük a tömbbe
+    while ($row = $res->fetch()) {
+    $tomb[] = $row;
+    }
+    
+    return $tomb;
+    }
+
 }
 ?>
