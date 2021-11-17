@@ -81,5 +81,25 @@ class Dbconnect{
     return $tomb;
     }
 
+    function regisztral($user, $pwd){
+        $res = $this->con->prepare("INSERT INTO `users`(`nev`, `jelszo`) VALUES (:nev,:jelszo)");
+
+        $res->bindparam("nev", $user);
+        $res->bindparam("jelszo", $pwd);
+        $res->execute();
+    }
+
+    function RegisztracioCheck($user){
+        $tomb = null;   //eredmény tömb
+
+        $res = $this->con->prepare("SELECT `nev` FROM `users` WHERE nev = ?");
+        $res->bindparam(1, $user);
+        $res->execute();
+
+        if ($res->rowCount() > 0){
+            return true;
+        }else return false;
+    }
+
 }
 ?>
