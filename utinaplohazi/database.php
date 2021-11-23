@@ -108,7 +108,7 @@ class Dbconnect{
 
     function nevID($user){
         $tomb = null;
-        $res = $this->con->prepare("SELECT utak.ID_user FROM `utak` INNER JOIN users ON utak.ID_user=:user;");
+        $res = $this->con->prepare("SELECT `ID_user` FROM `users` WHERE Nev = :user");
         $res->bindparam("user", $user);
         $res->execute();
 
