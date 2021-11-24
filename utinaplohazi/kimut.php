@@ -21,14 +21,14 @@ $db->Connection("utinaplo");
 $users = $db->selectUpload();
 $honnantomb = $db->honnanupload();
 $hovatomb = $db->hovaupload();
+$id = $db->nevID($user);
 
 // letöltöm az adatokat
 if (isset($_POST["mutasski"])){
-    $honnank = $_POST["honnanopcio"];
+
+  $honnank = $_POST["honnanopcio"];
     $hovak = $_POST["hovaopcio"];
-
-    $kimutatastomb = $db->kimutatas($honnank, $hovak);
-
+    $kimutatastomb = $db->kimutatas($honnank, $hovak, $id);
     $kimutatasra = true;
 }
 ?>
@@ -41,10 +41,10 @@ if (isset($_POST["mutasski"])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Útinapló</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -74,59 +74,62 @@ if (isset($_POST["mutasski"])){
     <div class="col" style="width:22%">
     <form action="#" method="POST">
     <!-- Honnan feltöltés php-ból -->
-    <label for="cimzett">Honnan</label>
+    <label for="honnanopcio">Honnan</label>
     <select class="form-control" name="honnanopcio" id="honnanopcio">
+              <option value="">Válasszon várost!</option>
         <?php
             foreach ($honnantomb as $key) {
-                echo "<option value=$key[ID_ut]>$key[Honnan]</option>";
+                echo "<option value=$key[Honnan]>$key[Honnan]</option>";
             }
         ?>
     </select>
-</form>
+
     </div>
     <div class="col">
-    <form action="#" method="POST">
     <!-- Hova feltöltés php-ból -->
-    <label for="cimzett">Hova</label>
+    <label for="hovaopcio">Hova</label>
     <select class="form-control" name="hovaopcio" id="hovaopcio">
+              <option value="">Válasszon várost!</option>
         <?php
             foreach ($hovatomb as $key) {
-                echo "<option value=$key[ID_ut]>$key[Hova]</option>";
+                echo "<option value=$key[Hova]>$key[Hova]</option>";
             }
         ?>
     </select>
-</form>
+
     </div>
   </div>
     <!-- OK gomb -->
-    <button type="submit" name="mutasski" id="mutasski" class="btn btn-success">OK</button>
-
+    <button type="submit" name="mutasski" id="mutasski" class="btn btn-success">Kimutat</button>
+    </form>
 
 
 <!-- Eredmény kiírása -->
 <div class="col-12 bg-secondary">
 <?php
     if($kimutatasra){
-        print("Utinapló");
-?>
-        <table class="text-left">
-            <tr>
-                <th>Dátum</th>
-                <th>Honnan</th>
-                <th>Hova</th>
-                <th>km</th>
-        <?php
+        
+       
+        if (is_null($kimutatastomb)){
+          echo "Nincs ilyen utinapló!";
+        }
+        else {
+          print("Utinapló");
+
+       echo '<table class="text-center align-items-center">
+       <tr>
+           <th>Dátum</th>
+           <th>Honnan</th>
+           <th>Hova </th>
+           <th>km</th>' ;
         foreach ($kimutatastomb as $key) {
             print("<tr><td>".$key['Datum']."</td><td>".$key['Honnan']."</td><td>".$key['Hova']."</td><td>".$key['km']."</td></tr>");
         }
+      }
     }
         ?>
-
+        </table>
 </div>
 </div>
-
-   
-
-
 </body>
 </html>

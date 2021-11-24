@@ -65,7 +65,7 @@ class Dbconnect{
     function honnanupload(){
         $tomb = null;
     
-        $res = $this->con->prepare("SELECT Honnan, ID_ut FROM utak");
+        $res = $this->con->prepare("SELECT DISTINCT Honnan FROM utak");
         $res->execute();
     
         // Az eredmény halmazt kimentjük a tömbbe
@@ -79,7 +79,7 @@ class Dbconnect{
     function hovaupload(){
         $tomb = null;
     
-        $res = $this->con->prepare("SELECT Hova FROM utak");
+        $res = $this->con->prepare("SELECT DISTINCT Hova FROM utak");
         $res->execute();
     
         // Az eredmény halmazt kimentjük a tömbbe
@@ -89,13 +89,15 @@ class Dbconnect{
         return $tomb;
     }
 
-    function kimutatas($honnank, $hovak){
-        $tomb = null;
-        $res = $this->con->prepare("SELECT `Datum`, `Honnan`, `Hova`, `km` FROM `utak` WHERE (`Honnan` = :honnan AND `Hova` = :hova)");
+    function kimutatas($honnank, $hovak, $id){
+        $tomb = null; 
+        $res = $this->con->prepare("SELECT `Datum`, `Honnan`, `Hova`, `km` FROM `utak` WHERE (Honnan LIKE :honnan OR Hova LIKE :hova) AND ID_user = :id");
 
-        $res->bindparam("honnan", $honnan);
-        $res->bindparam("hova", $hova);
-
+        $honnank .= "%";
+        $hovak .= "%";
+        $res->bindparam("honnan", $honnank);
+        $res->bindparam("hova", $hovak);
+        $res->bindparam("id", $id);
         $res->execute();
 
     // Az eredmény halmazt kimentjük a tömbbe
@@ -116,8 +118,8 @@ class Dbconnect{
     while ($row = $res->fetch()) {
     $tomb[] = $row;
     }
-    
-    return $tomb;
+
+    return $tomb[0]["ID_user"];
 
     }
     
